@@ -20,14 +20,14 @@ test.describe("Testing e-commerce page", () => {
 		// await expect(cardOverlay).toBeVisible()
 		await expect(cardOverlayDisplayAttribute).toBe("block")
 
-		const addToCartBtn = page.locator("#cartModal + .col-sm-4 .overlay-content > a.add-to-cart")
-		await addToCartBtn.click()
+		await page.click("#cartModal + .col-sm-4 .overlay-content > a.add-to-cart")
 
 		const modal = page.locator("#cartModal")
 		await expect(modal).toHaveClass(/show/)
 
-		const modalTitle = page.locator(".modal-content .modal-title")
-		await expect(modalTitle).toHaveText("Added!")
+		await expect(
+			page.locator(".modal-content .modal-title")
+		).toHaveText("Added!")
 
 		await page.click("button[data-dismiss='modal']")
 		await expect(modal).toHaveClass(/fade/)
