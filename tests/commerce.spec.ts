@@ -16,6 +16,16 @@ test.describe("Testing e-commerce page", () => {
 		const cardOverlay = page.locator("#cartModal + .col-sm-4 .product-overlay")
 		await expect(cardOverlay).toBeVisible()
 
+		const addToCartBtn = page.locator("#cartModal + .col-sm-4 .overlay-content > a.add-to-cart")
+		await addToCartBtn.click()
 
+		const modal = page.locator("#cartModal")
+		await expect(modal).toHaveClass(/show/)
+
+		const modalTitle = page.locator(".modal-content .modal-title")
+		await expect(modalTitle).toHaveText("Added!")
+
+		await page.click("button[data-dismiss='modal']")
+		await expect(modal).toHaveClass(/fade/)
 	})
 })
