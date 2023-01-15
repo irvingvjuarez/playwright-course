@@ -1,18 +1,11 @@
 import { test, expect } from '@playwright/test';
 
-test('has title', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
-
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
-});
-
-test('get started link', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
-
-  // Click the get started link.
-  await page.getByRole('link', { name: 'Get started' }).click();
-
-  // Expects the URL to contain intro.
-  await expect(page).toHaveURL(/.*intro/);
+test('test', async ({ page }) => {
+  await page.goto('https://medium.com/');
+  await page.getByRole('complementary').getByRole('link', { name: 'Technology' }).click();
+  await page.getByPlaceholder('Search Medium').click();
+  await page.getByPlaceholder('Search Medium').fill('counscious machines');
+  await page.getByPlaceholder('Search Medium').press('Enter');
+  // await page.locator('div:nth-child(24) > div').click();
+  // await page.getByRole('link', { name: 'Deep Learning Is Going to Teach Us All the Lesson of Our Lives: Jobs Are for Machines' }).click();
 });
