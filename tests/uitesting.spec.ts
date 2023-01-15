@@ -3,12 +3,18 @@ const BASE_URL = "http://uitestingplayground.com/"
 
 test('test', async ({ page }) => {
   await page.goto(BASE_URL);
-  await page.getByRole('link', { name: 'Resources' }).click();
-  expect(page).toHaveURL(BASE_URL + "resources")
+	await page.click(".blockquote-footer")
 
-  await page.getByRole('link', { name: 'Home' }).click();
-  await page.getByRole('link', { name: 'Click' }).click();
-	expect(page).toHaveURL(BASE_URL + "click")
+  await page.click("a[href='/resources']");
+  await expect(page).toHaveURL(BASE_URL + "resources")
 
-  await page.getByRole('button', { name: 'Button That Ignores DOM Click Event' }).click();
+  await page.goBack();
+	await expect(page).toHaveURL(BASE_URL)
+
+  await page.click("a[href='/click']");
+	await expect(page).toHaveURL(BASE_URL + "click")
+
+	const btn = page.locator("id=badButton")
+  await btn.click();
+	await expect(btn).toHaveClass("btn btn-success")
 });
