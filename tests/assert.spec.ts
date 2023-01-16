@@ -11,6 +11,8 @@ test.describe("Using assertions", () => {
 		const contentText = "Juárez"
 		await page.type("input.form-control", contentText)
 
+		await page.pause()
+
 		const changingBtn = page.locator("#updatingButton")
 		await changingBtn.click()
 		await expect(changingBtn).toHaveText(contentText)
